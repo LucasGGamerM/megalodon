@@ -45,6 +45,9 @@
 	<string name="mo_confirm_to_mute_conversation">Are you sure you want to mute this conversation?</string>
 	<string name="mo_confirm_to_unmute_conversation">Are you sure you want to unmute this conversation?</string>
 	<string name="mo_mute_hashtag">Mute hashtag</string>
+	<string name="mo_mute_hashtag_explanation_muted_home">You won’t see posts mentioning this hashtag in your Home timeline.</string>
+	<string name="mo_mute_hashtag_explanation_discreet">Others won’t know that you’ve muted this hashtag.</string>
+	<string name="mo_mute_hashtag_explanation_search">You can still find posts with this hashtag on other timelines or through search.</string>
 	<string name="mo_unmute_hashtag">Unmute hashtag</string>
 	<string name="mo_confirm_to_mute_hashtag">Are you sure you want to mute this hashtag?</string>
 	<string name="mo_confirm_to_unmute_hashtag">Are you sure you want to unmute this hashtag?</string>

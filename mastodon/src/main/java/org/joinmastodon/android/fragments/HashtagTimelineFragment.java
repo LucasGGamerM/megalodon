@@ -11,7 +11,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,21 +31,21 @@ import org.joinmastodon.android.model.FilterAction;
 import org.joinmastodon.android.api.session.AccountSessionManager;
 import org.joinmastodon.android.model.FilterContext;
 import org.joinmastodon.android.model.FilterKeyword;
-import org.joinmastodon.android.api.session.AccountSessionManager;
-import org.joinmastodon.android.model.FilterContext;
 import org.joinmastodon.android.model.Hashtag;
 import org.joinmastodon.android.model.Status;
 import org.joinmastodon.android.model.TimelineDefinition;
+import org.joinmastodon.android.ui.Snackbar;
+import org.joinmastodon.android.ui.sheets.MuteHashtagConfirmationSheet;
 import org.joinmastodon.android.ui.text.SpacerSpan;
 import org.joinmastodon.android.ui.utils.UiUtils;
 import org.joinmastodon.android.ui.views.ProgressBarButton;
 import org.parceler.Parcels;
 
-import java.util.ArrayList;
+import java.time.Duration;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.concurrent.atomic.AtomicReference;
 
 import me.grishka.appkit.Nav;
 import me.grishka.appkit.api.Callback;
@@ -105,15 +104,35 @@ public class HashtagTimelineFragment extends PinnableStatusListFragment{
 		muteMenuItem.setIcon(newMute ? R.drawable.ic_fluent_speaker_2_24_regular : R.drawable.ic_fluent_speaker_off_24_regular);
 	}
 
-	private void showMuteDialog(boolean mute) {
-		UiUtils.showConfirmationAlert(getContext(),
-										   mute ? R.string.mo_unmute_hashtag : R.string.mo_mute_hashtag,
-										   mute ? R.string.mo_confirm_to_unmute_hashtag : R.string.mo_confirm_to_mute_hashtag,
-										   mute ? R.string.do_unmute : R.string.do_mute,
-										   mute ? R.drawable.ic_fluent_speaker_2_28_regular : R.drawable.ic_fluent_speaker_off_28_regular,
-				mute ? this::unmuteHashtag : this::muteHashtag
-		);
+	private void showMuteDialog(boolean currentlyMuted) {
+		if (currentlyMuted) {
+			unmuteHashtag();
+			return;
+		}
+
+		//pass a references, so they can be changed inside the confirmation sheet
+		AtomicReference<Duration> muteDuration=new AtomicReference<>(Duration.ZERO);
+		new MuteHashtagConfirmationSheet(getContext(), null, muteDuration, hashtag, (onSuccess, onError)->{
+			FilterKeyword hashtagFilter=new FilterKeyword();
+			hashtagFilter.wholeWord=true;
+			hashtagFilter.keyword="#"+hashtagName;
+			new CreateFilter("#"+hashtagName, EnumSet.of(FilterContext.HOME), FilterAction.HIDE, (int) muteDuration.get().getSeconds(), List.of(hashtagFilter)).setCallback(new Callback<>(){
+				@Override
+				public void onSuccess(Filter result){
+					filter=Optional.of(result);
+					updateMuteState(true);
+					onSuccess.run();
+				}
+
+				@Override
+				public void onError(ErrorResponse error){
+					error.showToast(getContext());
+					onError.run();
+				}
+			}).exec(accountID);
+		}).show();
 	}
+
 	private void unmuteHashtag() {
 		//safe to get, this only called if filter is present
 		new DeleteFilter(filter.get().id).setCallback(new Callback<>(){
@@ -121,6 +140,9 @@ public class HashtagTimelineFragment extends PinnableStatusListFragment{
 			public void onSuccess(Void result){
 				filter=Optional.empty();
 				updateMuteState(false);
+				new Snackbar.Builder(getContext())
+						.setText(getContext().getString(R.string.unmuted_user_x, '#'+hashtagName))
+						.show();
 			}
 
 			@Override
@@ -129,26 +151,6 @@ public class HashtagTimelineFragment extends PinnableStatusListFragment{
 			}
 		}).exec(accountID);
 	}
-
-	private void muteHashtag() {
-		FilterKeyword hashtagFilter=new FilterKeyword();
-		hashtagFilter.wholeWord=true;
-		hashtagFilter.keyword="#"+hashtagName;
-		new CreateFilter("#"+hashtagName, EnumSet.of(FilterContext.HOME), FilterAction.HIDE, 0 , List.of(hashtagFilter)).setCallback(new Callback<>(){
-			@Override
-			public void onSuccess(Filter result){
-				filter=Optional.of(result);
-				updateMuteState(true);
-			}
-
-			@Override
-			public void onError(ErrorResponse error){
-				error.showToast(getContext());
-			}
-		}).exec(accountID);
-	}
-
-
 
 	@Override
 	protected TimelineDefinition makeTimelineDefinition() {

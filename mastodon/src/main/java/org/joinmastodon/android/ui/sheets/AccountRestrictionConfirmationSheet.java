@@ -1,5 +1,6 @@
 package org.joinmastodon.android.ui.sheets;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.ColorDrawable;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import org.joinmastodon.android.R;
 import org.joinmastodon.android.model.Account;
+import org.joinmastodon.android.ui.M3AlertDialogBuilder;
 import org.joinmastodon.android.ui.drawables.EmptyDrawable;
 import org.joinmastodon.android.ui.utils.UiUtils;
 import org.joinmastodon.android.ui.views.AutoOrientationLinearLayout;
@@ -23,6 +25,11 @@ import org.joinmastodon.android.ui.views.ProgressBarButton;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+
+import java.time.Duration;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
+
 import me.grishka.appkit.utils.V;
 import me.grishka.appkit.views.BottomSheet;
 
@@ -107,6 +114,51 @@ public abstract class AccountRestrictionConfirmationSheet extends BottomSheet{
 	protected void addRow(@DrawableRes int icon, @StringRes int text){
 		addRow(icon, getContext().getString(text));
 	}
+
+	public void addDurationRow(@NonNull Context context, AtomicReference<Duration> muteDuration) {
+		//Moshidon: add row to choose a duration, e.g. for muting accounts
+		Button muteDurationBtn=new Button(getContext());
+		muteDurationBtn.setOnClickListener(v->getMuteDurationDialog(context, muteDuration, muteDurationBtn).show());
+		muteDurationBtn.setText(R.string.sk_duration_indefinite);
+		addRow(R.drawable.ic_fluent_clock_20_regular, R.string.sk_mute_label, muteDurationBtn);
+	}
+
+	@NonNull
+	private M3AlertDialogBuilder getMuteDurationDialog(@NonNull Context context, AtomicReference<Duration> muteDuration, Button button){
+		M3AlertDialogBuilder builder=new M3AlertDialogBuilder(context);
+		builder.setTitle(R.string.sk_mute_label);
+		builder.setIcon(R.drawable.ic_fluent_clock_20_regular);
+		List<Duration> durations =List.of(Duration.ZERO,
+				Duration.ofMinutes(5),
+				Duration.ofMinutes(30),
+				Duration.ofHours(1),
+				Duration.ofHours(6),
+				Duration.ofDays(1),
+				Duration.ofDays(3),
+				Duration.ofDays(7),
+				Duration.ofDays(7));
+
+		String[] choices = {context.getString(R.string.sk_duration_indefinite),
+				context.getString(R.string.sk_duration_minutes_5),
+				context.getString(R.string.sk_duration_minutes_30),
+				context.getString(R.string.sk_duration_hours_1),
+				context.getString(R.string.sk_duration_hours_6),
+				context.getString(R.string.sk_duration_days_1),
+				context.getString(R.string.sk_duration_days_3),
+				context.getString(R.string.sk_duration_days_7)};
+
+		builder.setSingleChoiceItems(choices, durations.indexOf(muteDuration.get()), (dialog, which) -> {});
+
+		builder.setPositiveButton(R.string.ok, (dialog, which)->{
+			int selected = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
+			muteDuration.set(durations.get(selected));
+			button.setText(choices[selected]);
+		});
+		builder.setNegativeButton(R.string.cancel, null);
+
+		return builder;
+	}
+
 
 	public interface ConfirmCallback{
 		void onConfirmed(Runnable onSuccess, Runnable onError);
