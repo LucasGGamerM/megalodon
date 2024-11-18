@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mo_color_palette_black_and_white">أبيض وأسود</string>
+    <string name="mo_personal_note">إضافة ملاحظة إلى هذا الملف التعريفي</string>
+    <string name="mo_settings_contribute">ساهم في موشيدون Moshidon</string>
+    <string name="mo_update_available">موشيدون %s متوفّر للتنزيل.</string>
+    <string name="mo_update_ready">تم تنزيل موشيدون %s وهو جاهز للتنصيب.</string>
+    <string name="mo_confirm_unfollow_title">إلغاء متابعة الحساب</string>
+    <string name="mo_instance_admin">يديره</string>
+    <string name="mo_welcome_text">في البداية، رجاءً أدخل اسم نطاق خادمك هنا.</string>
+    <string name="mo_no_image_desc_title">الصورة لا تحتوي على وصف</string>
+    <string name="mo_open_camera">خذ صورة</string>
+    <string name="mo_mute_label">المدة:</string>
+    <string name="mo_duration_minutes_5">5 دقائق</string>
+    <string name="mo_duration_minutes_30">30 دقيقة</string>
+    <string name="mo_duration_hours_1">ساعة واحدة</string>
+    <string name="mo_duration_hours_6">6 ساعات</string>
+    <string name="mo_instance_registration_open">ممكن</string>
+    <string name="mo_instance_registration_approval">يتطلّب مراجعة يديوية</string>
+    <string name="mo_instance_registration">التسجيل</string>
+    <string name="mo_duration_days_1">يوم واحد</string>
+    <string name="mo_duration_days_3">3 أيام</string>
+    <string name="mo_duration_days_7">7 أيام</string>
+    <string name="mo_instance_contact">للإتصال</string>
+    <string name="mo_instance_users">المستخدِمون</string>
+    <string name="mo_instance_status">الحالة</string>
+    <string name="mo_notification_management_settings">إدارة الإشعارات</string>
+    <string name="mo_add_custom_server_local_timeline">إضافة خيط محلي مخصص لخادم</string>
+    <string name="mo_sending_error">خطأ في النشر</string>
+    <string name="mo_instance_info_open_timeline">الخيط المحلي</string>
+    <string name="mo_severity_silence">مكتومة</string>
+    <string name="mo_severity_suspend">محجوبة</string>
+    <string name="mo_repo_url">https://github.com/LucasGGamerM/moshidon</string>
+    <string name="mo_instance_info_moderated_servers">خوادم تحت الإشراف</string>
+    <string name="mo_donate_url">https://github.com/sponsors/LucasGGamerM</string>
+    <string name="mo_emoji_recent">المُستخدَمة حديثًا</string>
+    <string name="mo_muted_accounts">الحسابات المكتومة</string>
+    <string name="mo_blocked_accounts">الحسابات المحظورة</string>
+</resources>

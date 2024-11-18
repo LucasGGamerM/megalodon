@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mo_disable_dividers">Inaktivera inläggsavdelare</string>
+    <string name="mo_relocate_publish_button">Flytta publiceringsknappen</string>
+    <string name="mo_color_palette_nord">Nord</string>
+    <string name="mo_hide_compose_button_while_scrolling_setting">Dölj skrivknappen medan du skrollar</string>
+</resources>

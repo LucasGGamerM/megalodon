@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mo_clear_recent_emoji">Son kullanılan emojileri temizle</string>
+    <string name="mo_color_palette_black_and_white">Siyah Beyaz</string>
+    <string name="mo_personal_note">Bu profile not ekle</string>
+    <string name="mo_no_image_desc_title">Fotoğraf açıklaması yok</string>
+    <string name="mo_no_image_desc">Eklenen fotoğrafların açıklamaları yok. Görme engelli insanlar için, lütfen eklemeyi düşünün.</string>
+    <string name="mo_emoji_recent">Son kullanılan</string>
+    <string name="mo_personal_note_confirm">Not değişikliklerini onayla</string>
+    <string name="mo_personal_note_update_failed">Not kaydedilemedi</string>
+    <string name="mo_settings_contribute">Moshidon\'a katkıda bulun</string>
+    <string name="mo_update_available">Moshidon %s indirilmeye hazır.</string>
+    <string name="mo_update_ready">Moshidon %s indirildi ve yüklenmeye hazır.</string>
+    <string name="mo_color_palette_nord">Nord</string>
+    <string name="mo_disable_reminder_to_add_alt_text">Fotoğraflara açıklama yazısı ekleme hatırlatıcısını devre dışı bırak</string>
+    <string name="mo_filtered">Filtrelenen: %s</string>
+</resources>

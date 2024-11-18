@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sk_settings_show_boosts">Monstrar le impulsos</string>
+    <string name="sk_no_update_available">Nulle actualisation disponibile</string>
+    <string name="sk_settings_rules">Regulas</string>
+    <string name="sk_settings_show_replies">Monstrar responsas</string>
+    <string name="sk_settings_reply_visibility_all">Tote le responsas</string>
+    <string name="sk_settings_app_version">Megalodon v%1$s (%2$d)</string>
+    <string name="sk_available_languages">Linguas disponibile</string>
+    <string name="sk_language_name">%1$s (%2$s)</string>
+    <string name="sk_welcome_title">Benvenite!</string>
+    <string name="sk_example_domain">exemplo.social</string>
+    <string name="sk_settings_donate">Facer un donation</string>
+    <string name="sk_check_for_update">Verificar actualisationes</string>
+    <string name="sk_update_ready">Megalodon %s es discargate e preste a installar.</string>
+    <string name="sk_color_palette_material3">Systema</string>
+    <string name="sk_post_language">Lingua: %s</string>
+    <string name="sk_reblogged_as">Impulsate como %s</string>
+    <string name="sk_update_available">Megalodon %s es preste a disargar.</string>
+    <string name="sk_settings_about">A proposito del application</string>
+    <string name="sk_undo_reblog">Disfacer le impulso</string>
+</resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mo_color_palette_nord">Nord</string>
+    <string name="mo_relocate_publish_button">Recol·loca el botó de publicació</string>
+    <string name="mo_disable_dividers">Desactiva els divisors de publicacions</string>
+    <string name="mo_update_available">Moshidon %s ja es pot baixar.</string>
+    <string name="mo_update_ready">S\'ha baixat Moshidon %s i ja es pot instal·lar.</string>
+    <string name="mo_poll_option_add">Afegeix una opció a l\'enquesta</string>
+    <string name="mo_duration_days_7">7 dies</string>
+    <string name="mo_share_open_url">Obre a l\'aplicaicó</string>
+    <string name="mo_personal_note">Afegeix una nota sobre el perfil</string>
+    <string name="mo_personal_note_update_failed">No s\'ha pogut desar la nota</string>
+    <string name="mo_personal_note_confirm">Confirma els canvis de la nota</string>
+    <string name="mo_fab_compose">Redacta</string>
+    <string name="mo_duration_indefinite">Indefinit</string>
+    <string name="mo_duration_minutes_30">30 minuts</string>
+    <string name="mo_duration_hours_1">1 hora</string>
+    <string name="mo_duration_hours_6">6 hores</string>
+    <string name="mo_duration_days_1">1 dia</string>
+    <string name="mo_duration_days_3">3 dies</string>
+    <string name="mo_hide_compose_button_while_scrolling_setting">Amaga el botó de redacció en desplaçar</string>
+    <string name="mo_settings_contribute">Contribueix a Moshidon</string>
+    <string name="mo_no_image_desc_title">Ni hi ha descripció de la imatge</string>
+    <string name="mo_mute_label">Durada:</string>
+    <string name="mo_duration_minutes_5">5 minuts</string>
+    <string name="mo_mention_reblogger_automatically">En respondre, menciona automàticament el compte que ha impulsat la publicació</string>
+    <string name="mo_color_palette_black_and_white">Blanc i Negre</string>
+    <string name="mo_welcome_text">Per començar, per favor introduïu el nom de la vostra instància a continuació</string>
+    <string name="mo_no_image_desc">Les imatges incloses no tenen descripció. Penseu a afegir-ne un per permetre que les persones amb discapacitat visual hi puguin participar.</string>
+    <string name="mo_enable_dividers">Mostrar els separadors de les publicacions</string>
+</resources>

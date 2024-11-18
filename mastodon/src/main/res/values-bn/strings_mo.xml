@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mo_update_available">মসিডন %s ডাউনলড করার জন্য তৈরি।</string>
+    <string name="mo_welcome_text">শুরু করার জন্য, নিচে আপনার হোম ইন্সটান্স এর ডোমেনের নাম লিখুন।</string>
+    <string name="mo_personal_note_confirm">টিকা সম্পর্কিত পরিবর্তন নিশ্চিত করুন</string>
+    <string name="mo_no_image_desc_title">চিত্র বিবরণ অনুপস্থিত</string>
+    <string name="mo_update_ready">মসিডন %s ডাউনলড করা হয়েছে এবং ইনস্টল করার জন্য তৈরি।</string>
+    <string name="mo_enable_dividers">পোস্ট বিভাজক দেখান</string>
+    <string name="mo_color_palette_nord">নর্ড</string>
+    <string name="mo_color_palette_black_and_white">সাদা কালো</string>
+    <string name="mo_clear_recent_emoji">সম্প্রতি ব্যবহৃত ইমজি মুছুন</string>
+    <string name="mo_filtered">ফিলটার হয়েছেঃ %s</string>
+    <string name="mo_settings_contribute">মসিডনে অবদান করুন</string>
+    <string name="mo_personal_note">এই প্রফাইল সম্বন্ধে একটি টিকা লিখুন</string>
+    <string name="mo_emoji_recent">সম্প্রতি ব্যবহৃত</string>
+    <string name="mo_personal_note_update_failed">টিকা শেভ করতে ব্যর্থ হয়েছে</string>
+    <string name="mo_hide_compose_button_while_scrolling_setting">স্ক্রোল করার সময় রচনা বোতাম লোকান</string>
+    <string name="mo_relocate_publish_button">প্রকাশন বোতাম স্থানান্তর করুন</string>
+</resources>

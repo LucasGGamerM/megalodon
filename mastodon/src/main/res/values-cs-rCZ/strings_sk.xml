@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sk_confirm_delete_and_redraft">Jste si jisti, že chcete tento příspěvek smazat a přepsat\?</string>
+    <string name="sk_confirm_unpin_post">Jste si jisti, že chcete tento příspěvek odepnout\?</string>
+    <string name="sk_confirm_pin_post">Chcete si tento příspěvek připnout na svůj profil\?</string>
+    <string name="sk_federated_timeline_info_banner">Toto jsou nejnovější příspěvky lidí z vaší federace.</string>
+    <string name="sk_settings_enable_marquee">Zakázat posouvání textu v titulkových lištách</string>
+    <string name="sk_welcome_text">Žralok tě zdraví! Chcete-li začít, zadejte níže název domény své domovské instance.</string>
+    <string name="sk_clear_recent_languages">Vymazat nedávno použité jazyky</string>
+    <string name="sk_confirm_clear_recent_languages">Jste si jisti, že chcete vymazat nedávno použité jazyky\?</string>
+    <string name="sk_delete_notification_confirm">Opravdu chcete toto oznámení odstranit\?</string>
+    <string name="sk_settings_translation_availability_note_unavailable">%s zřejmě nepodporuje překlad.</string>
+    <string name="sk_clear_all_notifications_confirm">Opravdu chcete vymazat všechna oznámení\?</string>
+    <string name="sk_loading_fediverse_resource_title">Podívejte se na Fediverse</string>
+    <string name="sk_loading_resource_on_instance_title">Vyhledávání na %s</string>
+    <string name="sk_resource_not_found">Zdroj se nepodařilo najít</string>
+    <string name="sk_scheduled_too_soon">Příspěvek musí být naplánován alespoň 10 minut dopředu.</string>
+    <string name="sk_confirm_delete_draft">Jste si jistý, že chcete tento navržený příspěvek smazat\?</string>
+    <string name="sk_confirm_delete_scheduled_post">Určitě chcete tento naplánovaný příspěvek smazat\?</string>
+    <string name="sk_delete_list_confirm">Opravdu chcete tento seznam odstranit\?</string>
+    <string name="sk_app_name">Megalodon</string>
+    <string name="sk_pinned_posts">Připnutý</string>
+    <string name="sk_delete_and_redraft">vymazat a přepracovat</string>
+</resources>

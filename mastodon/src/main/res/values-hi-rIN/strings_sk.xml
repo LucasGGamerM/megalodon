@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sk_app_name">मेगालोडॉन</string>
+    <string name="sk_pinned_posts">पिन किया गया</string>
+    <string name="sk_delete_and_redraft">हटाएं और पुनः ड्राफ्ट करें</string>
+    <string name="sk_confirm_delete_and_redraft_title">हटाएं और पोस्ट को पुनः ड्राफ्ट करें</string>
+    <string name="sk_pin_post">प्रोफाइल पर पिन करें</string>
+    <string name="sk_confirm_pin_post_title">पोस्ट को प्रोफाइल पर पिन करें</string>
+    <string name="sk_pinning">पोस्ट पिन की जा रही है…</string>
+    <string name="sk_unpin_post">प्रोफाइल से अनपिन करें</string>
+    <string name="sk_confirm_unpin_post_title">पोस्ट को प्रोफाइल से अनपिन करें</string>
+    <string name="sk_unpinning">पोस्ट अनपिन की जा रही है…</string>
+    <string name="sk_image_description">चित्र विवरण</string>
+    <string name="sk_visibility_unlisted">असूचित</string>
+    <string name="sk_confirm_delete_and_redraft">क्या आप निश्चित हैं कि आप इस पोस्ट को हटाकर पुनः ड्राफ़्ट करना चाहते हैं\?</string>
+    <string name="sk_confirm_unpin_post">क्या आप निश्चित हैं कि आपको यह पोस्ट अनपिन करनी है\?</string>
+    <string name="sk_confirm_pin_post">क्या आप इस पोस्ट को अपनी प्रोफाइल पर पिन करना चाहते हैं\?</string>
+</resources>

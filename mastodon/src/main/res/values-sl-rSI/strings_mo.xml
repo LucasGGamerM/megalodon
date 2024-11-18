@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mo_color_palette_black_and_white">Črno in belo</string>
+    <string name="mo_hide_compose_button_while_scrolling_setting">Skrij gumb za novo sporočilo med drsenjem</string>
+    <string name="mo_personal_note_confirm">Potrdite spremembe, ki jih želite zabeležiti</string>
+    <string name="mo_personal_note_update_failed">Shranjevanje zapiska ni uspelo</string>
+    <string name="mo_settings_contribute">Prispevajte k Moshidonu</string>
+    <string name="mo_update_available">Moshidon %s je pripravljen za prenos.</string>
+    <string name="mo_update_ready">Moshidon %s je prenesen in pripravljen za namestitev.</string>
+    <string name="mo_no_image_desc_title">Ni opisa slike</string>
+    <string name="mo_no_image_desc">Vključene slike nimajo opisa. Prosimo, razmislite o dodajanju opisa in tako omogočite sodelovanje tudi slabovidnim.</string>
+    <string name="mo_emoji_recent">Nedavno uporabljeno</string>
+    <string name="mo_personal_note">Dodajte opombo o tem profilu</string>
+    <string name="mo_enable_dividers">Pokaži delilnike objav</string>
+    <string name="mo_relocate_publish_button">Premesti gumb za objavo</string>
+    <string name="mo_welcome_text">Za začetek spodaj vnesite ime domene vaše domače instance.</string>
+    <string name="mo_clear_recent_emoji">Počisti nedavno uporabljene emodžije</string>
+    <string name="mo_filtered">Filtrirano: %s</string>
+</resources>

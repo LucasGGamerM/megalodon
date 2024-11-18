@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sk_app_name">Megalodon</string>
+    <string name="sk_delete_and_redraft">Выдаліць і паправіць</string>
+    <string name="sk_confirm_delete_and_redraft_title">Выдаліць і паправіць допіс</string>
+    <string name="sk_pin_post">Замацаваць у профілі</string>
+    <string name="sk_confirm_pin_post_title">Замацаваць допіс у профілі</string>
+    <string name="sk_confirm_pin_post">Вы хочаце замацаваць гэты допіс у сваім профілі\?</string>
+    <string name="sk_pinning">Замацаванне допісу…</string>
+    <string name="sk_confirm_unpin_post_title">Адмацаваць допіс ад профілю</string>
+    <string name="sk_unpinning">Адмацаванне допісу…</string>
+    <string name="sk_image_description">Апісанне выявы</string>
+    <string name="sk_visibility_unlisted">Прыхаваны</string>
+    <string name="sk_settings_show_replies">Паказваць адказы</string>
+    <string name="sk_settings_show_boosts">Паказаць пашырэнні</string>
+    <string name="sk_pinned_posts">Замацавана</string>
+    <string name="sk_confirm_delete_and_redraft">Вы ўпэўненыя, што жадаеце выдаліць і паправіць гэты допіс\?</string>
+    <string name="sk_unpin_post">Адмацаваць ад профілю</string>
+    <string name="sk_confirm_unpin_post">Вы ўпэўненыя, што жадаеце адмацаваць гэты допіс\?</string>
+</resources>
