@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<include layout="@layout/display_item_header" />
+
+	<TextView
+		style="@style/m3_headline_small"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="16dp"
+		android:layout_marginVertical="12dp"
+		android:text="@string/sk_welcome_title" />
+
+	<TextView
+		style="@style/m3_body_large"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingHorizontal="16dp"
+		android:text="@string/mo_welcome_text" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="0.5dp"
+		android:layout_marginTop="16dp"
+		android:background="?attr/colorM3OutlineVariant"/>
+
+	<EditText
+		android:id="@+id/search_edit"
+		android:layout_width="match_parent"
+		android:layout_height="56dp"
+		android:layout_marginTop="16dp"
+		android:layout_marginBottom="8dp"
+		android:layout_marginHorizontal="16dp"
+		android:inputType="textUri|textNoSuggestions"
+		android:singleLine="true"
+		android:imeOptions="actionGo"
+		android:drawableStart="@drawable/ic_language_24px"
+		android:drawablePadding="12dp"
+		android:drawableTint="?android:textColorSecondary"
+		android:background="@drawable/rounded_box"
+		android:paddingHorizontal="16dp"
+		android:elevation="0dp"
+		android:hint="@string/sk_example_domain"/>
+
+
+	<ViewStub
+		android:layout="?errorViewLayout"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:id="@+id/error"
+		android:visibility="gone" />
+
+</LinearLayout>

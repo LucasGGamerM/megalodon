@@ -82,7 +82,7 @@ abstract class InstanceCatalogFragment extends BaseRecyclerFragment<CatalogInsta
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		isSignup=getArguments().getBoolean("signup");
+		isSignup=getArguments() != null && getArguments().getBoolean("signup");
 	}
 
 	protected abstract void proceedWithAuthOrSignup(Instance instance);

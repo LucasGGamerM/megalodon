@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<me.grishka.appkit.views.FragmentRootLinearLayout
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:orientation="vertical"
+	android:id="@+id/appkit_loader_root"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:background="?colorM3SurfaceVariant">
+
+	<include layout="@layout/appkit_toolbar"/>
+
+	<FrameLayout
+		android:id="@+id/appkit_loader_content"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1">
+
+		<include layout="@layout/loading"
+			android:id="@+id/loading"/>
+
+		<ViewStub android:layout="?errorViewLayout"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:id="@+id/error"
+			android:visibility="gone"/>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:id="@+id/content_stub"/>
+
+	</FrameLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="0.5dp"
+		android:background="?attr/colorM3OutlineVariant"/>
+
+	<LinearLayout
+		android:id="@+id/button_bar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?colorM3SurfaceVariant"
+		android:outlineProvider="bounds"
+		android:orientation="horizontal"
+		android:elevation="0dp">
+
+		<Button
+			style="@style/Widget.Mastodon.M3.Button.Filled"
+			android:id="@+id/btn_next"
+			android:minWidth="145dp"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_margin="16dp"
+			android:layout_weight="1"
+			android:text="@string/next" />
+
+	</LinearLayout>
+</me.grishka.appkit.views.FragmentRootLinearLayout>

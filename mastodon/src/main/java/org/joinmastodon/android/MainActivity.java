@@ -24,6 +24,7 @@ import org.joinmastodon.android.fragments.ProfileFragment;
 import org.joinmastodon.android.fragments.SplashFragment;
 import org.joinmastodon.android.fragments.ThreadFragment;
 import org.joinmastodon.android.fragments.onboarding.AccountActivationFragment;
+import org.joinmastodon.android.fragments.onboarding.CustomWelcomeFragment;
 import org.joinmastodon.android.model.Notification;
 import org.joinmastodon.android.model.SearchResults;
 import org.joinmastodon.android.ui.utils.UiUtils;
@@ -183,7 +184,7 @@ public class MainActivity extends FragmentStackActivity{
 
 	public void restartHomeFragment(){
 		if(AccountSessionManager.getInstance().getLoggedInAccounts().isEmpty()){
-			showFragmentClearingBackStack(new SplashFragment());
+			showFragmentClearingBackStack(new CustomWelcomeFragment());
 		}else{
 			AccountSessionManager.getInstance().maybeUpdateLocalInfo();
 			AccountSession session;
