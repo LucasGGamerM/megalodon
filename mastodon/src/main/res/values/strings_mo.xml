@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mo_app_name" translatable="false">Moshidon</string>
+    <string name="mo_app_name_debug" translatable="false">Moshidon Debug</string>
+    <string name="mo_app_name_nightly" translatable="false">Moshidon Nightly</string>
+
+    <string name="mo_color_palette_nord">Nord</string>
+    <string name="mo_color_palette_black_and_white">Black and White</string>
+    <string name="mo_app_username" translatable="false">\@moshidon</string>
+    <string name="mo_enable_dividers">Show post dividers</string>
+    <string name="mo_relocate_publish_button">Relocate publish button</string>
+    <string name="mo_hide_compose_button_while_scrolling_setting">Hide compose button while scrolling</string>
+    <string name="mo_welcome_text">To get started, please enter your home instance’s domain name below.</string>
+
+    <!--    Setting this as non-translatable as it simply doesn't change with language-->
+    <string name="mo_settings_app_version" translatable="false">Moshidon v%1$s (%2$d)</string>
+
+    <string name="mo_personal_note">Add a note about this profile</string>
+    <string name="mo_personal_note_confirm">Confirm changes to note</string>
+    <string name="mo_personal_note_update_failed">Failed to save note</string>
+    <string name="mo_settings_contribute">Contribute to Moshidon</string>
+    <string name="mo_update_available">Moshidon %s is ready to download.</string>
+    <string name="mo_update_ready">Moshidon %s is downloaded and ready to install.</string>
+    <string name="mo_no_image_desc_title">No Image description</string>
+    <string name="mo_no_image_desc">The included images have no description. Please consider adding one, to allow visually impaired people to participate.</string>
+    <string name="mo_emoji_recent">Recently used</string>
+    <string name="mo_clear_recent_emoji">Clear recently used emoji</string>
+    <string name="mo_filtered">Filtered: %s</string>
+    <string name="mo_disable_relocate_publish_button_to_enable_customization">Disable "Relocate publish button" to allow customization</string>
+    <string name="mo_disable_reminder_to_add_alt_text">Disable reminder to add alt text</string>
+    <string name="mo_add_custom_server_local_timeline">Add a custom server\'s local timeline</string>
+    <string name="mo_notification_action_replied">Successfully replied to the post by %s</string>
+    <string name="mo_change_default_reply_visibility_to_unlisted">Reply as \'Unlisted\' by default</string>
+    <string name="mo_composer_behavior">Composer\'s Behavior</string>
+    <string name="mo_notification_management_settings">Manage Notifications</string>
+    <string name="mo_open_camera">Take picture</string>
+    <string name="mo_camera_not_available">No camera available!</string>
+	<string name="mo_muted_conversation_successfully">Successfully muted conversation</string>
+	<string name="mo_unmuted_conversation_successfully">Successfully unmuted conversation</string>
+	<string name="mo_muting">Muting…</string>
+	<string name="mo_unmuting">Unmuting…</string>
+	<string name="mo_mute_conversation">Mute conversation</string>
+	<string name="mo_unmute_conversation">Unmute conversation</string>
+	<string name="mo_confirm_to_mute_conversation">Are you sure you want to mute this conversation?</string>
+	<string name="mo_confirm_to_unmute_conversation">Are you sure you want to unmute this conversation?</string>
+	<string name="mo_mute_hashtag">Mute hashtag</string>
+	<string name="mo_unmute_hashtag">Unmute hashtag</string>
+	<string name="mo_confirm_to_mute_hashtag">Are you sure you want to mute this hashtag?</string>
+	<string name="mo_confirm_to_unmute_hashtag">Are you sure you want to unmute this hashtag?</string>
+
+    <!--    accessibility labels-->
+    <string name="mo_poll_option_add">Add new poll option</string>
+    <string name="mo_fab_compose">Compose</string>
+    <string name="mo_sending_error">Error publishing</string>
+
+    <!--    duration labels-->
+    <string name="mo_mute_label">Duration:</string>
+    <string name="mo_duration_indefinite">Indefinite</string>
+    <string name="mo_duration_minutes_5">5 minutes</string>
+    <string name="mo_duration_minutes_30">30 minutes</string>
+    <string name="mo_duration_hours_1">1 hour</string>
+    <string name="mo_duration_hours_6">6 hours</string>
+    <string name="mo_duration_days_1">1 day</string>
+    <string name="mo_duration_days_3">3 days</string>
+    <string name="mo_duration_days_7">7 days</string>
+
+    <string name="mo_share_open_url">Open in App</string>
+
+	<string name="mo_instance_view_info">View Server Info</string>
+    <string name="mo_instance_admin">Administered by</string>
+    <string name="mo_instance_contact">Contact</string>
+    <string name="mo_instance_users">Users</string>
+    <string name="mo_instance_status">Status</string>
+    <string name="mo_instance_registration">Registration</string>
+    <string name="mo_instance_registration_open">Open</string>
+    <string name="mo_instance_registration_approval">Approval required</string>
+    <string name="mo_instance_info_open_timeline">Local timeline</string>
+    <string name="mo_instance_info_moderated_servers">Moderated servers</string>
+    <string name="mo_severity_silence">Silenced</string>
+    <string name="mo_severity_suspend">Blocked</string>
+	<string name="mo_filter_notifications">Filter notifications</string>
+
+	<string name="mo_repo_url" translatable="false">https://github.com/LucasGGamerM/moshidon</string>
+	<string name="mo_donate_url" translatable="false">https://github.com/sponsors/LucasGGamerM</string>
+
+<!--    Settings summaries-->
+    <string name="mo_setting_true_black_summary">Might save power on AMOLED displays</string>
+    <string name="mo_setting_marquee_summary">Disables the ellipsized title scrolling</string>
+    <string name="mo_setting_uniform_summary">Use the app icon for all notifications</string>
+    <string name="mo_setting_reduced_motion_summary">Disable animations of interactions</string>
+    <string name="mo_setting_play_gif_summary">Autoplay GIFs in avatars and emoji</string>
+    <string name="mo_setting_remote_follower_summary">Show followers from other instances</string>
+    <string name="mo_setting_relocate_publish_summary">Move the publish button to the bottom bar</string>
+    <string name="mo_setting_default_reply_privacy_summary">Replies will be opted out of discovery features</string>
+    <string name="mo_setting_interaction_count_summary">Show how many people interacted with a post in the timeline</string>
+    <string name="mo_setting_disable_swipe_summary">Swipe to change viewed timeline</string>
+    <string name="mo_setting_haptic_feedback_summary">Vibrate when interacting with posts</string>
+    <string name="mo_swap_bookmark_with_reblog_summary">Bookmark or reblog posts from the notification</string>
+    <string name="mo_settings_show_posts_without_alt_summary">Posts will be hidden in all timelines, but can be revealed in threads and notifications</string>
+	<string name="mo_settings_remove_tracking_params_summary">Strip tracking information from links</string>
+
+<!--  Settings  -->
+    <string name="mo_notification_audience_settings">Notification Audience</string>
+    <string name="mo_settings_show_posts_without_alt">Show media posts with missing alt text</string>
+	<string name="mo_double_tap_to_search">Double tap to open search</string>
+	<string name="mo_double_tap_to_swipe_between_tabs">Double tap to swipe between tabs</string>
+	<string name="mo_haptic_feedback">Haptic feedback</string>
+	<string name="mo_swap_bookmark_with_reblog">Swap bookmark with reblog action</string>
+	<string name="mo_download_latest_nightly_release">Download latest nightly release</string>
+	<string name="mo_load_remote_followers">Load remote profile follows and followers</string>
+	<string name="mo_mention_reblogger_automatically">Automatically mention account who reblogged the post in replies</string>
+	<string name="mo_confirm_unfollow_title">Unfollow Account</string>
+	<string name="mo_confirm_unfollow">Confirm to unfollow %s</string>
+	<string name="mo_recent_emoji_cleared">Recent emoji cleared</string>
+	<string name="mo_show_media_preview">Show media preview in timelines</string>
+	<string name="mo_notification_filter_reset">Reset to default</string>
+	<string name="mo_settings_unifiedpush_warning">UnifiedPush not enabled</string>
+	<string name="mo_settings_unifiedpush_warning_no_distributors">No UnifiedPush Distributors installed. You will not receive any notifications.</string>
+	<string name="mo_settings_unifiedpush_warning_disabled">UnifiedPush is not enabled. You will not receive any notifications.</string>
+	<string name="mo_settings_unifiedpush_enable">Enable</string>
+	<string name="mo_settings_remove_tracking_params">Private Links</string>
+
+	<!--	Temporary Strings. They exist in strings_sk.xml, but are not available on Megalodon's weblate-->
+	<string name="mo_muted_accounts">Muted accounts</string>
+	<!--	<string name="mo_mutes">Mutes</string>-->
+	<string name="mo_blocked_accounts">Blocked accounts</string>
+<!--	<string name="mo_blocks">Blocks</string>-->
+	<string name="mo_mute_notifications">Hide notifications from this user?</string>
+	<string name="import_settings_confirm">Confirm to import settings?</string>
+	<string name="import_settings_confirm_body">All current settings and timelines will be overwritten! This action cannot be undone.</string>
+	<string name="import_settings_failed">Failed to import settings</string>
+	<string name="export_settings_share">Export Settings</string>
+	<string name="export_settings_fail">Failed to export settings</string>
+	<string name="export_settings_title">Export settings</string>
+	<string name="export_settings_summary">Export all logged-in accounts\' settings and timelines</string>
+	<string name="import_settings_title">Import settings</string>
+	<string name="import_settings_summary">Import previously exported settings and timelines</string>
+
+	<!-- error display item	-->
+	<string name="mo_error_display_title">Failed to display post</string>
+	<string name="mo_error_display_text">Something went wrong while loading this post. If the problem persists, please report it on our Issues page along with the error details.</string>
+	<string name="mo_error_display_copy_error_details">Copy details</string>
+	<string name="mo_trending_link_read">Read</string>
+	<string name="mo_icon_gnome" translatable="false">GNOME</string>
+</resources>
