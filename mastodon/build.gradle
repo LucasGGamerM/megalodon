@@ -101,6 +101,9 @@ dependencies {
 	annotationProcessor 'org.parceler:parceler:1.1.12'
 	coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
 
+	// MOSHIDON: fluent icons ftw
+	implementation 'com.microsoft.design:fluent-system-icons:1.1.265@aar'
+
 	// MOSHIDON: we don't do that here
 //	def appCenterSdkVersion = "5.0.4"
 //	appcenterPrivateBetaImplementation "com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}"
