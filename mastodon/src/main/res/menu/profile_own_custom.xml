@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<group android:id="@+id/menu_group1">
+		<item android:id="@+id/followed_hashtags" android:title="@string/sk_hashtags_you_follow" android:icon="@drawable/ic_fluent_number_symbol_24_regular"/>
+		<item android:id="@+id/bookmarks" android:title="@string/bookmarks" android:icon="@drawable/ic_fluent_bookmark_multiple_24_regular" android:showAsAction="always"/>
+		<item android:id="@+id/manage_user_lists" android:title="@string/sk_your_lists" android:icon="@drawable/ic_fluent_people_24_regular"/>
+		<item android:id="@+id/favorites" android:title="@string/your_favorites" android:icon="@drawable/ic_fluent_star_24_regular"/>
+		<item android:id="@+id/muted_accounts" android:title="@string/sk_muted_accounts" android:icon="@drawable/ic_fluent_speaker_off_24_regular"/>
+		<item android:id="@+id/blocked_accounts" android:title="@string/sk_blocked_accounts" android:icon="@drawable/ic_fluent_shield_24_regular"/>
+		<item android:id="@+id/scheduled" android:title="@string/sk_unsent_posts" android:icon="@drawable/ic_fluent_folder_open_24_regular" android:showAsAction="always"/>
+	</group>
+	<group android:id="@+id/menu_group2">
+		<item android:id="@+id/open_in_browser" android:title="@string/open_in_browser" android:icon="@drawable/ic_fluent_globe_24_regular"/>
+		<item android:id="@+id/share" android:title="@string/share_user" android:icon="@drawable/ic_fluent_share_24_regular"/>
+		<item android:id="@+id/open_with_account" android:title="@string/sk_open_with_account" android:visible="false" android:icon="@drawable/ic_fluent_person_swap_24_regular">
+			<menu android:id="@+id/accounts" />
+		</item>
+	</group>
+</menu>
