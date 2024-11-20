@@ -39,7 +39,7 @@
 		android:inputType="textUri|textNoSuggestions"
 		android:singleLine="true"
 		android:imeOptions="actionGo"
-		android:drawableStart="@drawable/ic_language_24px"
+		android:drawableStart="@drawable/ic_fluent_globe_20_regular"
 		android:drawablePadding="12dp"
 		android:drawableTint="?android:textColorSecondary"
 		android:background="@drawable/rounded_box"
