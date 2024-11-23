@@ -235,6 +235,12 @@ public class HomeFragment extends AppKitFragment implements AssistContentProvide
 
 	private void onTabSelected(@IdRes int tab){
 		Fragment newFragment=fragmentForTab(tab);
+
+		// MOSHIDON:
+		if(tab==R.id.tab_search && R.id.tab_search==currentTab){
+			searchFragment.openSearch();
+		}
+
 		if(tab==currentTab){
 			if(newFragment instanceof ScrollableToTop scrollable)
 				scrollable.scrollToTop();

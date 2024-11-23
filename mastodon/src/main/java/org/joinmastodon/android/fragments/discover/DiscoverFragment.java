@@ -248,6 +248,16 @@ public class DiscoverFragment extends AppKitFragment implements ScrollableToTop{
 			postsFragment.loadData();
 	}
 
+	// MOSHIDON: this is the method that works, enterSearch does not open search :D
+	public void openSearch(){
+		Bundle args=new Bundle();
+		args.putString("account", accountID);
+		if(!TextUtils.isEmpty(currentQuery)){
+			args.putString("query", currentQuery);
+		}
+		Nav.goForResult(getActivity(), SearchQueryFragment.class, args, QUERY_RESULT, DiscoverFragment.this);
+	}
+
 	private void enterSearch(){
 		if(!searchActive){
 			searchActive=true;
