@@ -266,6 +266,17 @@ public class HomeFragment extends AppKitFragment implements AssistContentProvide
 	}
 
 	private boolean onTabLongClick(@IdRes int tab){
+		if(tab==R.id.tab_search){
+			if(currentTab!=R.id.tab_search){
+				// MOSHIDON: I don't know why using setCurrentTab leads to visual glitches
+				// when initially loading the fragment. This solves it somehow
+				onTabSelected(R.id.tab_search);
+				tabBar.selectTab(R.id.tab_search);
+			}
+			searchFragment.openSearch();
+			return true;
+		}
+
 		if(tab==R.id.tab_profile){
 			ArrayList<String> options=new ArrayList<>();
 			for(AccountSession session:AccountSessionManager.getInstance().getLoggedInAccounts()){
