@@ -27,16 +27,16 @@ android {
 		debug{
 			debuggable true
 		}
-		appcenterPrivateBeta{
-			initWith release
-			minifyEnabled false
-			shrinkResources false
-			versionNameSuffix "-priv-beta"
-		}
-		appcenterPublicBeta{
-			initWith release
-			versionNameSuffix "-beta"
-		}
+//		appcenterPrivateBeta{
+//			initWith release
+//			minifyEnabled false
+//			shrinkResources false
+//			versionNameSuffix "-priv-beta"
+//		}
+//		appcenterPublicBeta{
+//			initWith release
+//			versionNameSuffix "-beta"
+//		}
 		githubRelease{
 			initWith release
 		}
@@ -50,12 +50,12 @@ android {
 		coreLibraryDesugaringEnabled true
 	}
 	sourceSets{
-		appcenterPrivateBeta{
-			setRoot "src/appcenter"
-		}
-		appcenterPublicBeta{
-			setRoot "src/appcenter"
-		}
+//		appcenterPrivateBeta{
+//			setRoot "src/appcenter"
+//		}
+//		appcenterPublicBeta{
+//			setRoot "src/appcenter"
+//		}
 		githubRelease{
 			setRoot "src/github"
 		}
