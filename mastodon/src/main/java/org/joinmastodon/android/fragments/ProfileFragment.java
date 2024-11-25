@@ -447,6 +447,12 @@ public class ProfileFragment extends LoaderFragment implements ScrollableToTop, 
 		if(refreshing)
 			return;
 		refreshing=true;
+
+		// MOSHIDON: save private note on refresh
+		if(!isOwnProfile){
+			savePrivateNote(noteEdit.getText().toString());
+		}
+
 		doLoadData();
 	}
 
