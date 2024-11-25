@@ -23,6 +23,7 @@ import org.joinmastodon.android.api.session.AccountSession;
 import org.joinmastodon.android.api.session.AccountSessionManager;
 import org.joinmastodon.android.fragments.HomeFragment;
 import org.joinmastodon.android.fragments.SplashFragment;
+import org.joinmastodon.android.fragments.onboarding.CustomWelcomeFragment;
 import org.joinmastodon.android.ui.ClickableSingleViewRecyclerAdapter;
 import org.joinmastodon.android.ui.M3AlertDialogBuilder;
 import org.joinmastodon.android.ui.OutlineProviders;
@@ -81,7 +82,8 @@ public class AccountSwitcherSheet extends BottomSheet{
 		adapter.addAdapter(new SingleViewRecyclerAdapter(handle));
 		adapter.addAdapter(new AccountsAdapter());
 		adapter.addAdapter(new ClickableSingleViewRecyclerAdapter(makeSimpleListItem(R.string.add_account, R.drawable.ic_add_24px), ()->{
-			Nav.go(activity, SplashFragment.class, null);
+			// We use CustomWelcomeFragment instead of SplashFragment
+			Nav.go(activity, CustomWelcomeFragment.class, null);
 			dismiss();
 		}));
 		adapter.addAdapter(new ClickableSingleViewRecyclerAdapter(makeSimpleListItem(R.string.log_out_all_accounts, R.drawable.ic_logout_24px), this::confirmLogOutAll));
