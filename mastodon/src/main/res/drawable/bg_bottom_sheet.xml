@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:bottom="-28dp">
-		<shape android:tint="@color/m3_primary_alpha5" android:tintMode="src_over">
-			<solid android:color="?colorM3Surface"/>
-			<corners android:radius="28dp"/>
-		</shape>
-	</item>
-</layer-list>
