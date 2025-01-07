@@ -111,12 +111,13 @@ public class CustomEmojiPopupKeyboard extends PopupKeyboard{
 		list.setPadding(V.dp(16), 0, V.dp(16), 0);
 		imgLoader=new ListImageLoaderWrapper(activity, list, new RecyclerViewDelegate(list), null);
 
-		List<Emoji> recentEmoji=new ArrayList<>(lp.recentCustomEmoji);
-		if(!recentEmoji.isEmpty())
-			adapter.addAdapter(new SingleCategoryAdapter(recentEmojiCategory=new EmojiCategory(activity.getString(R.string.mo_emoji_recent), recentEmoji)));
-
-		for(EmojiCategory category:emojis)
-			adapter.addAdapter(new SingleCategoryAdapter(category));
+		if (!forReaction){
+			List<Emoji> recentEmoji=new ArrayList<>(lp.recentCustomEmoji);
+			if(!recentEmoji.isEmpty())
+				adapter.addAdapter(new SingleCategoryAdapter(recentEmojiCategory=new EmojiCategory(activity.getString(R.string.mo_emoji_recent), recentEmoji)));
+			for(EmojiCategory category : emojis)
+				adapter.addAdapter(new SingleCategoryAdapter(category));
+		}
 		list.setAdapter(adapter);
 		list.addItemDecoration(new RecyclerView.ItemDecoration(){
 			@Override
@@ -227,6 +228,17 @@ public class CustomEmojiPopupKeyboard extends PopupKeyboard{
 			emojis=AccountSessionManager.getInstance().getCustomEmojis(domain);
 			adapter.notifyDataSetChanged();
 		}
+	}
+
+	public void customToggleKeyboardPopup(){
+		if (adapter.getAdapterCount() == 0){
+			List<Emoji> recentEmoji=new ArrayList<>(lp.recentCustomEmoji);
+			if(!recentEmoji.isEmpty())
+				adapter.addAdapter(new SingleCategoryAdapter(recentEmojiCategory=new EmojiCategory(activity.getString(R.string.mo_emoji_recent), recentEmoji)));
+			for(EmojiCategory category : emojis)
+				adapter.addAdapter(new SingleCategoryAdapter(category));
+		}
+		super.toggleKeyboardPopup(null);
 	}
 
 	private class SingleCategoryAdapter extends UsableRecyclerView.Adapter<RecyclerView.ViewHolder> implements ImageLoaderRecyclerAdapter, Filterable{

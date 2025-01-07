@@ -265,7 +265,7 @@ public class EmojiReactionsStatusDisplayItem extends StatusDisplayItem {
 		public void onBackspace() {}
 
 		private void onReactClick(View v){
-			emojiKeyboard.toggleKeyboardPopup(null);
+			emojiKeyboard.customToggleKeyboardPopup();
 			v.setSelected(emojiKeyboard.isVisible());
 			space.setVisibility(emojiKeyboard.isVisible() ? View.VISIBLE : View.GONE);
 			DisplayMetrics displayMetrics = new DisplayMetrics();
