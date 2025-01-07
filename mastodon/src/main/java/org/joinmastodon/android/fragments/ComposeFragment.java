@@ -272,7 +272,7 @@ public class ComposeFragment extends MastodonToolbarFragment implements OnBackPr
 			return;
 		}
 		if(customEmojis.isEmpty()){
-			AccountSessionManager.getInstance().updateInstanceInfo(instanceDomain);
+			AccountSessionManager.getInstance().updateInstanceInfo(instanceDomain, session.token);
 		}
 
 		Bundle bundle = savedInstanceState != null ? savedInstanceState : getArguments();

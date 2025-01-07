@@ -98,11 +98,11 @@ public class AccountSessionManager{
 		File file=new File(MastodonApp.context.getFilesDir(), "accounts.json");
 		if(!file.exists())
 			return;
-		HashSet<String> domains=new HashSet<>();
+		HashMap<String, Token> domains=new HashMap<>();
 		try(FileInputStream in=new FileInputStream(file)){
 			SessionsStorageWrapper w=MastodonAPIController.gson.fromJson(new InputStreamReader(in, StandardCharsets.UTF_8), SessionsStorageWrapper.class);
 			for(AccountSession session:w.accounts){
-				domains.add(session.domain.toLowerCase());
+				domains.put(session.domain.toLowerCase(), session.token);
 				sessions.put(session.getID(), session);
 			}
 		}catch(Exception x){
@@ -126,7 +126,7 @@ public class AccountSessionManager{
 		wrapper.instance = instance;
 		MastodonAPIController.runInBackground(()->writeInstanceInfoFile(wrapper, instance.uri));
 
-		updateMoreInstanceInfo(instance, instance.uri);
+		updateMoreInstanceInfo(instance, instance.uri, token);
 		if (!UnifiedPush.getDistributor(context).isEmpty()) {
 			UnifiedPush.registerApp(
 					context,
@@ -303,9 +303,9 @@ public class AccountSessionManager{
 
 	public void maybeUpdateLocalInfo(AccountSession activeSession){
 		long now=System.currentTimeMillis();
-		HashSet<String> domains=new HashSet<>();
+		HashMap<String, Token> domains=new HashMap<>();
 		for(AccountSession session:sessions.values()){
-			domains.add(session.domain.toLowerCase());
+			domains.put(session.domain.toLowerCase(), session.token);
 			if(session == activeSession || now-session.infoLastUpdated>24L*3600_000L){
 				session.reloadPreferences(null);
 				updateSessionLocalInfo(session);
@@ -319,12 +319,12 @@ public class AccountSessionManager{
 		}
 	}
 
-	private void maybeUpdateCustomEmojis(Set<String> domains, String activeDomain){
+	private void maybeUpdateCustomEmojis(HashMap<String, Token> domains, String activeDomain){
 		long now=System.currentTimeMillis();
-		for(String domain:domains){
+		for(String domain:domains.keySet()){
 			Long lastUpdated=instancesLastUpdated.get(domain);
 			if(domain.equals(activeDomain) || lastUpdated==null || now-lastUpdated>24L*3600_000L){
-				updateInstanceInfo(domain);
+				updateInstanceInfo(domain, domains.get(domain));
 			}
 		}
 	}
@@ -366,13 +366,13 @@ public class AccountSessionManager{
 				.exec(session.getID());
 	}
 
-	public void updateInstanceInfo(String domain){
+	public void updateInstanceInfo(String domain, Token token){
 		new GetInstance()
 				.setCallback(new Callback<>(){
 					@Override
 					public void onSuccess(Instance instance){
 						instances.put(domain, instance);
-						updateMoreInstanceInfo(instance, domain);
+						updateMoreInstanceInfo(instance, domain, token);
 					}
 
 					@Override
@@ -383,22 +383,22 @@ public class AccountSessionManager{
 				.execNoAuth(domain);
 	}
 
-	public void updateMoreInstanceInfo(Instance instance, String domain) {
+	public void updateMoreInstanceInfo(Instance instance, String domain, Token token) {
 		new GetInstance.V2().setCallback(new Callback<>() {
 			@Override
 			public void onSuccess(Instance.V2 v2) {
 				if (instance != null) instance.v2 = v2;
-				updateInstanceEmojis(instance, domain);
+				updateInstanceEmojis(instance, domain, token);
 			}
 
 			@Override
 			public void onError(ErrorResponse errorResponse) {
-				updateInstanceEmojis(instance, domain);
+				updateInstanceEmojis(instance, domain, token);
 			}
 		}).execNoAuth(instance.uri);
 	}
 
-	private void updateInstanceEmojis(Instance instance, String domain){
+	private void updateInstanceEmojis(Instance instance, String domain, Token token){
 		new GetCustomEmojis()
 				.setCallback(new Callback<>(){
 					@Override
@@ -420,7 +420,7 @@ public class AccountSessionManager{
 						MastodonAPIController.runInBackground(()->writeInstanceInfoFile(wrapper, domain));
 					}
 				})
-				.execNoAuth(domain);
+				.exec(domain, token);
 	}
 
 	private File getInstanceInfoFile(String domain){
@@ -440,8 +440,8 @@ public class AccountSessionManager{
 		}
 	}
 
-	private void readInstanceInfo(Set<String> domains){
-		for(String domain:domains){
+	private void readInstanceInfo(HashMap<String, Token> domains){
+		for(String domain:domains.keySet()){
 			try(FileInputStream in=new FileInputStream(getInstanceInfoFile(domain))){
 				InputStreamReader reader=new InputStreamReader(in, StandardCharsets.UTF_8);
 				InstanceInfoStorageWrapper emojis=MastodonAPIController.gson.fromJson(reader, InstanceInfoStorageWrapper.class);
