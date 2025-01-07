@@ -24,6 +24,7 @@
 				android:orientation="vertical">
 
 				<RelativeLayout
+					android:id="@+id/profile_header"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content">
 
@@ -88,7 +89,8 @@
 							android:layout_height="wrap_content"
 							android:minHeight="48dp"
 							android:layout_marginTop="16dp"
-							android:layout_marginEnd="4dp">
+							android:layout_marginEnd="4dp"
+							android:layout_weight="1">
 
 							<org.joinmastodon.android.ui.views.ProgressBarButton
 								android:id="@+id/notify_btn"
@@ -118,7 +120,7 @@
 							android:minHeight="48dp"
 							android:layout_marginTop="16dp"
 							android:layout_marginStart="4dp"
-							android:layout_marginEnd="16dp">
+							android:layout_marginEnd="4dp">
 
 							<org.joinmastodon.android.ui.views.ProgressBarButton
 								android:id="@+id/profile_action_btn"
@@ -139,6 +141,27 @@
 								android:indeterminate="true"
 								android:outlineProvider="none"
 								android:visibility="gone" />
+						</FrameLayout>
+
+						<FrameLayout
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:minHeight="48dp"
+							android:layout_marginTop="16dp"
+							android:layout_marginEnd="16dp">
+
+							<ImageButton
+								android:id="@+id/qr_code"
+								android:layout_width="40dp"
+								android:layout_height="40dp"
+								android:layout_gravity="center_vertical"
+								style="@style/Widget.Mastodon.M3.Button.Outlined"
+								android:tint="?colorM3OnSurfaceVariant"
+								android:layout_marginStart="8dp"
+								android:padding="8dp"
+								android:contentDescription="@string/qr_code"
+								android:scaleType="centerCrop"
+								android:src="@drawable/ic_fluent_qr_code_24_filled"/>
 						</FrameLayout>
 					</LinearLayout>
 
