@@ -838,6 +838,14 @@ public abstract class BaseStatusListFragment<T extends DisplayItemsParent> exten
 		list.invalidateItemDecorations();
 	}
 
+	public void onFavoriteChanged(Status status, String itemID) {
+		FooterStatusDisplayItem.Holder footer=findHolderOfType(itemID, FooterStatusDisplayItem.Holder.class);
+		if(footer!=null){
+			footer.getItem().status=status;
+			footer.onFavoriteClick();
+		}
+	}
+
 	@Override
 	public String getAccountID(){
 		return accountID;

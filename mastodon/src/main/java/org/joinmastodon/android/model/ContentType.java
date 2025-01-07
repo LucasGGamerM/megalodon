@@ -34,6 +34,6 @@ public enum ContentType {
 	}
 
 	public boolean supportedByInstance(Instance i) {
-		return i.isAkkoma() || (this!=BBCODE && this!=MISSKEY_MARKDOWN);
+		return i.isAkkoma() || i.isIceshrimp() || (this!=BBCODE && this!=MISSKEY_MARKDOWN);
 	}
 }

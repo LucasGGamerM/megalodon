@@ -37,6 +37,8 @@ import okhttp3.Response;
 public abstract class MastodonAPIRequest<T> extends APIRequest<T>{
 	private static final String TAG="MastodonAPIRequest";
 
+	private static MastodonAPIController unauthenticatedApiController=new MastodonAPIController(null);
+
 	private String domain;
 	private AccountSession account;
 	private String path;
@@ -95,14 +97,14 @@ public abstract class MastodonAPIRequest<T> extends APIRequest<T>{
 
 	public MastodonAPIRequest<T> execNoAuth(String domain){
 		this.domain=domain;
-		AccountSessionManager.getInstance().getUnauthenticatedApiController().submitRequest(this);
+		unauthenticatedApiController.submitRequest(this);
 		return this;
 	}
 
 	public MastodonAPIRequest<T> exec(String domain, Token token){
 		this.domain=domain;
 		this.token=token;
-		AccountSessionManager.getInstance().getUnauthenticatedApiController().submitRequest(this);
+		unauthenticatedApiController.submitRequest(this);
 		return this;
 	}
 

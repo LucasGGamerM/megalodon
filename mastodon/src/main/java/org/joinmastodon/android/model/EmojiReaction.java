@@ -22,6 +22,7 @@ public class EmojiReaction {
 	public String staticUrl;
 
 	public transient ImageLoaderRequest request;
+	public transient boolean pendingChange=false;
 
 	public String getUrl(boolean playGifs){
 		String idealUrl=playGifs ? url : staticUrl;
@@ -60,4 +61,18 @@ public class EmojiReaction {
 		accounts.add(self);
 		accountIds.add(self.id);
 	}
+
+    public EmojiReaction copy() {
+		EmojiReaction r=new EmojiReaction();
+		r.accounts=accounts;
+		r.accountIds=accountIds;
+		r.count=count;
+		r.me=me;
+		r.name=name;
+		r.url=url;
+		r.staticUrl=staticUrl;
+		r.request=request;
+		r.pendingChange=pendingChange;
+		return r;
+    }
 }

@@ -146,12 +146,26 @@ public class Instance extends BaseModel{
 		return ci;
 	}
 
+	// This method has almost exclusively been used to improve support for
+	// Akkoma with no regard for Pleroma, hence its name. However, it is
+	// more likely than not that most uses should also apply to Pleroma,
+	// so checking for that too probably causes more good than harm.
 	public boolean isAkkoma() {
-		return pleroma != null;
+		return version.contains("compatible; Akkoma") || version.contains("compatible; Pleroma");
 	}
 
 	public boolean isPixelfed() {
 		return version.contains("compatible; Pixelfed");
+	}
+
+	// For both Iceshrimp-JS and Iceshrimp.NET
+	public boolean isIceshrimp() {
+		return version.contains("compatible; Iceshrimp");
+	}
+
+	// Only for Iceshrimp-JS
+	public boolean isIceshrimpJs() {
+		return version.contains("compatible; Iceshrimp "); // Iceshrimp.NET will not have a space immediately after
 	}
 
 	public boolean hasFeature(Feature feature) {
@@ -219,6 +233,7 @@ public class Instance extends BaseModel{
 		public StatusesConfiguration statuses;
 		public MediaAttachmentsConfiguration mediaAttachments;
 		public PollsConfiguration polls;
+		public ReactionsConfiguration reactions;
 	}
 
 	@Parcel
@@ -244,6 +259,12 @@ public class Instance extends BaseModel{
 		public int maxCharactersPerOption;
 		public int minExpiration;
 		public int maxExpiration;
+	}
+
+	@Parcel
+	public static class ReactionsConfiguration {
+		public int maxReactions;
+		public String defaultReaction;
 	}
 
 	@Parcel

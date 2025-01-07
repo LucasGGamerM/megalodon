@@ -327,13 +327,16 @@ public abstract class StatusListFragment extends BaseStatusListFragment<Status> 
 		public void onEmojiReactionsChanged(EmojiReactionsUpdatedEvent ev){
 			for(Status s:data){
 				if(s.getContentStatus().id.equals(ev.id)){
-					s.getContentStatus().update(ev);
-					AccountSessionManager.get(accountID).getCacheController().updateStatus(s);
 					for(int i=0;i<list.getChildCount();i++){
 						RecyclerView.ViewHolder holder=list.getChildViewHolder(list.getChildAt(i));
 						if(holder instanceof EmojiReactionsStatusDisplayItem.Holder reactions && reactions.getItem().status==s.getContentStatus() && ev.viewHolder!=holder){
-							reactions.rebind();
-						}else if(holder instanceof TextStatusDisplayItem.Holder text && text.getItem().parentID.equals(s.getID())){
+							reactions.updateReactions(ev.reactions);
+						}
+					}
+					AccountSessionManager.get(accountID).getCacheController().updateStatus(s);
+					for(int i=0;i<list.getChildCount();i++){
+						RecyclerView.ViewHolder holder=list.getChildViewHolder(list.getChildAt(i));
+						if(holder instanceof TextStatusDisplayItem.Holder text && text.getItem().parentID.equals(s.getID())){
 							text.rebind();
 						}
 					}

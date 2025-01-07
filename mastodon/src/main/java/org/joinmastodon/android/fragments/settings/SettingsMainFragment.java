@@ -64,7 +64,7 @@ public class SettingsMainFragment extends BaseSettingsFragment<Void>{
 		));
 
 		Instance instance=AccountSessionManager.getInstance().getInstanceInfo(account.domain);
-		if(!instance.isAkkoma()){
+		if(!instance.isAkkoma() && !instance.isIceshrimpJs()){ // hide filter settings on Akkoma and Iceshrimp-JS because the servers don't support the feature
 			data.add(3, new ListItem<>(R.string.settings_filters, 0, R.drawable.ic_fluent_filter_24_regular, this::onFiltersClick));
 		}
 

@@ -8,14 +8,23 @@ import org.joinmastodon.android.api.requests.statuses.SetStatusBookmarked;
 import org.joinmastodon.android.api.requests.statuses.SetStatusFavorited;
 import org.joinmastodon.android.api.requests.statuses.SetStatusMuted;
 import org.joinmastodon.android.api.requests.statuses.SetStatusReblogged;
+import org.joinmastodon.android.api.session.AccountSession;
+import org.joinmastodon.android.api.session.AccountSessionManager;
+import org.joinmastodon.android.events.EmojiReactionsUpdatedEvent;
 import org.joinmastodon.android.events.ReblogDeletedEvent;
 import org.joinmastodon.android.events.StatusCountersUpdatedEvent;
 import org.joinmastodon.android.events.StatusCreatedEvent;
-import org.joinmastodon.android.events.StatusDeletedEvent;
+import org.joinmastodon.android.model.Emoji;
+import org.joinmastodon.android.model.EmojiCategory;
+import org.joinmastodon.android.model.EmojiReaction;
+import org.joinmastodon.android.model.Instance;
 import org.joinmastodon.android.model.Status;
 import org.joinmastodon.android.model.StatusPrivacy;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 import me.grishka.appkit.api.Callback;
@@ -42,6 +51,9 @@ public class StatusInteractionController{
 		if(!Looper.getMainLooper().isCurrentThread())
 			throw new IllegalStateException("Can only be called from main thread");
 
+		AccountSession session=AccountSessionManager.get(accountID);
+		Instance instance=session.getInstance().get();
+
 		SetStatusFavorited current=runningFavoriteRequests.remove(status.id);
 		if(current!=null){
 			current.cancel();
@@ -54,6 +66,7 @@ public class StatusInteractionController{
 						result.favouritesCount = Math.max(0, status.favouritesCount + (favorited ? 1 : -1));
 						cb.accept(result);
 						if(updateCounters) E.post(new StatusCountersUpdatedEvent(result));
+						if(instance.isIceshrimpJs()) E.post(new EmojiReactionsUpdatedEvent(status.id, result.reactions, false, null));
 					}
 
 					@Override
@@ -63,12 +76,58 @@ public class StatusInteractionController{
 						status.favourited=!favorited;
 						cb.accept(status);
 						if(updateCounters) E.post(new StatusCountersUpdatedEvent(status));
+						if(instance.isIceshrimpJs()) E.post(new EmojiReactionsUpdatedEvent(status.id, status.reactions, false, null));
 					}
 				})
 				.exec(accountID);
 		runningFavoriteRequests.put(status.id, req);
 		status.favourited=favorited;
 		if(updateCounters) E.post(new StatusCountersUpdatedEvent(status));
+
+		if(instance.configuration==null || instance.configuration.reactions==null)
+			return;
+
+		String defaultReactionEmojiRaw=instance.configuration.reactions.defaultReaction;
+		if(!instance.isIceshrimpJs() || defaultReactionEmojiRaw==null)
+			return;
+
+		boolean reactionIsCustom=defaultReactionEmojiRaw.startsWith(":");
+		String defaultReactionEmoji=reactionIsCustom ? defaultReactionEmojiRaw.substring(1, defaultReactionEmojiRaw.length()-1) : defaultReactionEmojiRaw;
+		ArrayList<EmojiReaction> reactions=new ArrayList<>(status.reactions.size());
+		for(EmojiReaction reaction:status.reactions){
+			reactions.add(reaction.copy());
+		}
+		Optional<EmojiReaction> existingReaction=reactions.stream().filter(r->r.me).findFirst();
+		Optional<EmojiReaction> existingDefaultReaction=reactions.stream().filter(r->r.name.equals(defaultReactionEmoji)).findFirst();
+		if(existingReaction.isPresent() && !favorited){
+			existingReaction.get().me=false;
+			existingReaction.get().count--;
+			existingReaction.get().pendingChange=true;
+		}else if(existingDefaultReaction.isPresent() && favorited){
+			existingDefaultReaction.get().count++;
+			existingDefaultReaction.get().me=true;
+			existingDefaultReaction.get().pendingChange=true;
+		}else if(favorited){
+			EmojiReaction reaction=null;
+			if(reactionIsCustom){
+				List<EmojiCategory> customEmojis=AccountSessionManager.getInstance().getCustomEmojis(session.domain);
+				for(EmojiCategory category:customEmojis){
+					for(Emoji emoji:category.emojis){
+						if(emoji.shortcode.equals(defaultReactionEmoji)){
+							reaction=EmojiReaction.of(emoji, session.self);
+							break;
+						}
+					}
+				}
+				if(reaction==null)
+					reaction=EmojiReaction.of(defaultReactionEmoji, session.self);
+			}else{
+				reaction=EmojiReaction.of(defaultReactionEmoji, session.self);
+			}
+			reaction.pendingChange=true;
+			reactions.add(reaction);
+		}
+		E.post(new EmojiReactionsUpdatedEvent(status.id, reactions, false, null));
 	}
 
 	public void setReblogged(Status status, boolean reblogged, StatusPrivacy visibility, Consumer<Status> cb){

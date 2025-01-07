@@ -274,8 +274,10 @@ public abstract class StatusDisplayItem{
 				contentItems=items;
 			}
 
-			if(statusForContent.quote!=null){
+			if(statusForContent.quote!=null) {
 				int quoteInlineIndex=statusForContent.content.lastIndexOf("<span class=\"quote-inline\"><br/><br/>RE:");
+				if(quoteInlineIndex==-1)
+					quoteInlineIndex=statusForContent.content.lastIndexOf("<span class=\"quote-inline\"><br><br>RE:");
 				if(quoteInlineIndex!=-1)
 					statusForContent.content=statusForContent.content.substring(0, quoteInlineIndex);
 				else {

@@ -24,6 +24,7 @@ import org.joinmastodon.android.events.EmojiReactionsUpdatedEvent;
 import org.joinmastodon.android.events.PollUpdatedEvent;
 import org.joinmastodon.android.events.RemoveAccountPostsEvent;
 import org.joinmastodon.android.events.StatusCountersUpdatedEvent;
+import org.joinmastodon.android.model.Account;
 import org.joinmastodon.android.model.Notification;
 import org.joinmastodon.android.model.PaginatedResponse;
 import org.joinmastodon.android.model.Status;
@@ -122,7 +123,9 @@ public class NotificationsListFragment extends BaseStatusListFragment<Notificati
 		}
 
 		NotificationHeaderStatusDisplayItem titleItem;
-		if(n.type==Notification.Type.MENTION || n.type==Notification.Type.STATUS){
+		Account self=AccountSessionManager.get(accountID).self;
+		if(n.type==Notification.Type.MENTION || n.type==Notification.Type.STATUS
+				|| (n.type==Notification.Type.REBLOG && !n.status.account.id.equals(self.id))){ // Iceshrimp quote
 			titleItem=null;
 		}else{
 			titleItem=new NotificationHeaderStatusDisplayItem(n.id, this, n, accountID);
@@ -316,13 +319,16 @@ public class NotificationsListFragment extends BaseStatusListFragment<Notificati
 	public void onEmojiReactionsChanged(EmojiReactionsUpdatedEvent ev){
 		for(Notification n : data){
 			if(n.status!=null && n.status.getContentStatus().id.equals(ev.id)){
-				n.status.getContentStatus().update(ev);
-				AccountSessionManager.get(accountID).getCacheController().updateNotification(n);
 				for(int i=0; i<list.getChildCount(); i++){
 					RecyclerView.ViewHolder holder=list.getChildViewHolder(list.getChildAt(i));
 					if(holder instanceof EmojiReactionsStatusDisplayItem.Holder reactions && reactions.getItem().status==n.status.getContentStatus() && ev.viewHolder!=holder){
-						reactions.rebind();
-					}else if(holder instanceof TextStatusDisplayItem.Holder text && text.getItem().parentID.equals(n.getID())){
+						reactions.updateReactions(ev.reactions);
+					}
+				}
+				AccountSessionManager.get(accountID).getCacheController().updateNotification(n);
+				for(int i=0;i<list.getChildCount();i++){
+					RecyclerView.ViewHolder holder=list.getChildViewHolder(list.getChildAt(i));
+					if(holder instanceof TextStatusDisplayItem.Holder text && text.getItem().parentID.equals(n.getID())){
 						text.rebind();
 					}
 				}

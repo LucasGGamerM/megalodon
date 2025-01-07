@@ -113,7 +113,7 @@ public class HeaderStatusDisplayItem extends StatusDisplayItem{
 	}
 
 	public static HeaderStatusDisplayItem fromAnnouncement(Announcement a, Status fakeStatus, Account instanceUser, BaseStatusListFragment parentFragment, String accountID, Consumer<String> consumeReadID) {
-		HeaderStatusDisplayItem item = new HeaderStatusDisplayItem(a.id, instanceUser, a.startsAt, parentFragment, accountID, fakeStatus, null, null, null);
+		HeaderStatusDisplayItem item = new HeaderStatusDisplayItem(a.id, instanceUser, a.startsAt!=null ? a.startsAt : fakeStatus.createdAt, parentFragment, accountID, fakeStatus, null, null, null);
 		item.announcement = a;
 		item.consumeReadAnnouncement = consumeReadID;
 		return item;

@@ -50,11 +50,11 @@ public class Announcement extends BaseModel implements DisplayItemsParent {
 		if(reactions==null) reactions=new ArrayList<>();
 	}
 
-	public Status toStatus() {
+	public Status toStatus(boolean isIceshrimp) {
         Status s=Status.ofFake(id, content, publishedAt);
 		s.createdAt=startsAt != null ? startsAt : publishedAt;
 		s.reactions=reactions;
-        if(updatedAt != null) s.editedAt=updatedAt;
+        if(updatedAt != null && (!isIceshrimp || !updatedAt.equals(publishedAt))) s.editedAt=updatedAt;
         return s;
     }
 

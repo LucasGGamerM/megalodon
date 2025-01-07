@@ -15,7 +15,7 @@
 		android:indeterminate="true"
 		android:outlineProvider="none"
 		android:visibility="gone"/>
-	<org.joinmastodon.android.ui.views.ProgressBarButton
+	<org.joinmastodon.android.ui.views.EmojiReactionButton
 		android:id="@+id/btn"
 		style="@style/Widget.Mastodon.M3.Button.Outlined.Icon"
 		android:layout_width="wrap_content"
