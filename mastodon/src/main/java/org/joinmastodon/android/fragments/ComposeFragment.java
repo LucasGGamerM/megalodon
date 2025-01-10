@@ -1051,13 +1051,17 @@ public class ComposeFragment extends MastodonToolbarFragment implements OnBackPr
 
 	public void updatePublishButtonState(){
 		uuid=null;
+		boolean isReply=replyTo!=null;
+		// pixelfed only allows posts with images, but replies can be text-only
+		boolean isValidPixelfedPost=!isInstancePixelfed() || (isReply || !mediaViewController.isEmpty());
+		boolean isValidPost= isValidPixelfedPost && (trimmedCharCount>0 || !mediaViewController.isEmpty()) && charCount<=charLimit && mediaViewController.getNonDoneAttachmentCount()==0 && (pollViewController.isEmpty() || pollViewController.getNonEmptyOptionsCount()>1);
 		if(GlobalUserPreferences.relocatePublishButton && publishButtonRelocated != null){
-			publishButtonRelocated.setEnabled((!isInstancePixelfed() || !mediaViewController.isEmpty()) && (trimmedCharCount>0 || !mediaViewController.isEmpty()) && charCount<=charLimit && mediaViewController.getNonDoneAttachmentCount()==0 && (pollViewController.isEmpty() || pollViewController.getNonEmptyOptionsCount()>1));
+			publishButtonRelocated.setEnabled(isValidPost);
 		}
 
 		if(publishButton==null)
 			return;
-		publishButton.setEnabled((!isInstancePixelfed() || !mediaViewController.isEmpty()) && (trimmedCharCount>0 || !mediaViewController.isEmpty()) && charCount<=charLimit && mediaViewController.getNonDoneAttachmentCount()==0 && (pollViewController.isEmpty() || pollViewController.getNonEmptyOptionsCount()>1));
+		publishButton.setEnabled(isValidPost);
 	}
 
 	private void onCustomEmojiClick(Emoji emoji){
