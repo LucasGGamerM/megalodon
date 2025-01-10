@@ -1,11 +1,18 @@
 package org.joinmastodon.android;
 
+import static org.joinmastodon.android.api.MastodonAPIController.gson;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.gson.JsonSyntaxException;
+
+import org.joinmastodon.android.api.session.AccountLocalPreferences;
 import org.joinmastodon.android.api.session.AccountSession;
 import org.joinmastodon.android.api.session.AccountSessionManager;
 import org.joinmastodon.android.model.Account;
+
+import java.lang.reflect.Type;
 
 public class GlobalUserPreferences{
 	public static boolean playGifs;
@@ -17,6 +24,47 @@ public class GlobalUserPreferences{
 	public static boolean customEmojiInNames;
 	public static boolean showCWs;
 	public static boolean hideSensitiveMedia;
+
+	// MOSHIDON:
+	public static boolean trueBlackTheme;
+	public static boolean loadNewPosts;
+	public static boolean showNewPostsButton;
+	public static boolean toolbarMarquee;
+	public static boolean disableSwipe;
+	public static boolean enableDeleteNotifications;
+	public static boolean translateButtonOpenedOnly;
+	public static boolean uniformNotificationIcon;
+	public static boolean reduceMotion;
+	public static boolean showAltIndicator;
+	public static boolean showNoAltIndicator;
+	public static boolean enablePreReleases;
+	public static PrefixRepliesMode prefixReplies;
+	public static boolean collapseLongPosts;
+	public static boolean spectatorMode;
+	public static boolean autoHideFab;
+	public static boolean allowRemoteLoading;
+	public static AutoRevealMode autoRevealEqualSpoilers;
+	public static boolean disableM3PillActiveIndicator;
+	public static boolean showNavigationLabels;
+	public static boolean displayPronounsInTimelines, displayPronounsInThreads, displayPronounsInUserListings;
+	public static boolean overlayMedia;
+	public static boolean showSuicideHelp;
+	public static boolean underlinedLinks;
+	public static AccountLocalPreferences.ColorPreference color;
+	public static boolean likeIcon;
+	public static boolean showDividers;
+	public static boolean relocatePublishButton;
+	public static boolean defaultToUnlistedReplies;
+	public static boolean doubleTapToSearch;
+	public static boolean doubleTapToSwipe;
+	public static boolean confirmBeforeReblog;
+	public static boolean hapticFeedback;
+	public static boolean replyLineAboveHeader;
+	public static boolean swapBookmarkWithBoostAction;
+	public static boolean mentionRebloggerAutomatically;
+	public static boolean showPostsWithoutAlt;
+	public static boolean showMediaPreview;
+	public static boolean removeTrackingParams;
 
 	private static SharedPreferences getPrefs(){
 		return MastodonApp.context.getSharedPreferences("global", Context.MODE_PRIVATE);
@@ -109,5 +157,36 @@ public class GlobalUserPreferences{
 	public enum PreReplySheetType{
 		OLD_POST,
 		NON_MUTUAL
+	}
+
+	// MOSHIDON:
+	public enum AutoRevealMode {
+		NEVER,
+		THREADS,
+		DISCUSSIONS
+	}
+
+	// MOSHIDON:
+	public enum PrefixRepliesMode {
+		NEVER,
+		ALWAYS,
+		TO_OTHERS
+	}
+
+	// MOSHIDON: we have jason
+	public static <T> T fromJson(String json, Type type, T orElse){
+		if(json==null) return orElse;
+		try{
+			T value=gson.fromJson(json, type);
+			return value==null ? orElse : value;
+		}catch(JsonSyntaxException ignored){
+			return orElse;
+		}
+	}
+
+	// MOSHIDON: enums too!
+	public static <T extends Enum<T>> T enumValue(Class<T> enumType, String name) {
+		try { return Enum.valueOf(enumType, name); }
+		catch (NullPointerException npe) { return null; }
 	}
 }
