@@ -34,6 +34,7 @@ import org.joinmastodon.android.model.EmojiCategory;
 import org.joinmastodon.android.model.LegacyFilter;
 import org.joinmastodon.android.model.Instance;
 import org.joinmastodon.android.model.Token;
+import org.joinmastodon.android.utils.UnifiedPushHelper;
 import org.unifiedpush.android.connector.UnifiedPush;
 
 import java.io.File;
@@ -127,12 +128,12 @@ public class AccountSessionManager{
 		MastodonAPIController.runInBackground(()->writeInstanceInfoFile(wrapper, instance.uri));
 
 		updateMoreInstanceInfo(instance, instance.uri);
-		if (!UnifiedPush.getDistributor(context).isEmpty()) {
-			UnifiedPush.registerApp(
+		if (UnifiedPushHelper.isUnifiedPushEnabled(context)) {
+			UnifiedPush.register(
 					context,
 					session.getID(),
-					new ArrayList<>(),
-					context.getPackageName()
+					null,
+					null
 			);
 		} else if(PushSubscriptionManager.arePushNotificationsAvailable()){
 			session.getPushSubscriptionManager().registerAccountForPush(null);

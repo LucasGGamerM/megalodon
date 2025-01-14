@@ -2,12 +2,6 @@ pluginManagement {
 	repositories {
 		google()
 		mavenCentral()
-		maven {
-			url "https://www.jitpack.io"
-			content {
-				includeModule 'com.github.UnifiedPush', 'android-connector'
-			}
-		}
 		mavenLocal()
 	}
 }
@@ -17,7 +11,12 @@ dependencyResolutionManagement {
 		google()
 		mavenCentral()
 		mavenLocal()
-		maven { url 'https://jitpack.io' }
+		maven {
+			url 'https://jitpack.io'
+			content {
+				includeModule 'com.github.bottom-software-foundation', 'bottom-java'
+			}
+		}
 	}
 }
 rootProject.name = "Moshidon"
