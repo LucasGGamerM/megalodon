@@ -163,7 +163,7 @@ public class PushNotificationReceiver extends BroadcastReceiver{
 		PushNotificationReceiver.this.notify(context, PushNotification.fromNotification(context, account, notification), account.getID(), notification);
 	}
 
-	private void notify(Context context, PushNotification pn, String accountID, org.joinmastodon.android.model.Notification notification){
+	void notify(Context context, PushNotification pn, String accountID, org.joinmastodon.android.model.Notification notification){
 		NotificationManager nm=context.getSystemService(NotificationManager.class);
 		AccountSession session=AccountSessionManager.get(accountID);
 		Account self=session.self;

@@ -26,6 +26,7 @@ import org.joinmastodon.android.model.viewmodel.ListItem;
 import org.joinmastodon.android.ui.M3AlertDialogBuilder;
 import org.joinmastodon.android.ui.utils.HideableSingleViewRecyclerAdapter;
 import org.joinmastodon.android.ui.utils.UiUtils;
+import org.joinmastodon.android.utils.UnifiedPushHelper;
 import org.unifiedpush.android.connector.UnifiedPush;
 
 import java.time.Instant;
@@ -57,6 +58,7 @@ public class SettingsNotificationsFragment extends BaseSettingsFragment<Void>{
 
 	// MEGALODON
 	private boolean useUnifiedPush = false;
+	private boolean hasAnyUnifiedPushDistrib = false;
 	private CheckableListItem<Void> uniformIconItem, deleteItem, onlyLatestItem, unifiedPushItem;
 	private CheckableListItem<Void> postsItem, updateItem;
 
@@ -72,7 +74,8 @@ public class SettingsNotificationsFragment extends BaseSettingsFragment<Void>{
 		lp=AccountSessionManager.get(accountID).getLocalPreferences();
 
 		getPushSubscription();
-		useUnifiedPush=!UnifiedPush.getDistributor(getContext()).isEmpty();
+		useUnifiedPush=UnifiedPushHelper.isUnifiedPushEnabled(getContext());
+		hasAnyUnifiedPushDistrib=UnifiedPushHelper.hasAnyDistributorInstalled(getContext());
 
 		onDataLoaded(List.of(
 				pauseItem=new CheckableListItem<>(getString(R.string.pause_all_notifications), getPauseItemSubtitle(), CheckableListItem.Style.SWITCH, false, R.drawable.ic_fluent_alert_snooze_24_regular, i->onPauseNotificationsClick(false)),
@@ -94,7 +97,7 @@ public class SettingsNotificationsFragment extends BaseSettingsFragment<Void>{
 		));
 
 		//only enable when distributors, who can receive notifications, are available
-		unifiedPushItem.isEnabled=!UnifiedPush.getDistributors(getContext(), new ArrayList<>()).isEmpty();
+		unifiedPushItem.isEnabled=hasAnyUnifiedPushDistrib;
 		if (!unifiedPushItem.isEnabled) {
 			unifiedPushItem.subtitleRes=R.string.sk_settings_unifiedpush_no_distributor_body;
 		}
@@ -124,7 +127,7 @@ public class SettingsNotificationsFragment extends BaseSettingsFragment<Void>{
 		GlobalUserPreferences.save();
 		lp.keepOnlyLatestNotification=onlyLatestItem.checked;
 		lp.save();
-		if(needUpdateNotificationSettings && PushSubscriptionManager.arePushNotificationsAvailable()){
+		if(needUpdateNotificationSettings && (PushSubscriptionManager.arePushNotificationsAvailable() || useUnifiedPush)){
 			ps.alerts.mention=mentionsItem.checked;
 			ps.alerts.reblog=boostsItem.checked;
 			ps.alerts.favourite=favoritesItem.checked;
@@ -316,12 +319,12 @@ public class SettingsNotificationsFragment extends BaseSettingsFragment<Void>{
 			bannerText.setText(R.string.notifications_disabled_in_system);
 			bannerButton.setText(R.string.open_system_notification_settings);
 			bannerButton.setOnClickListener(v->openSystemNotificationSettings());
-		}else if(BuildConfig.BUILD_TYPE.equals("fdroidRelease") && UnifiedPush.getDistributor(getContext()).isEmpty()){
+		}else if(BuildConfig.BUILD_TYPE.equals("fdroidRelease") && useUnifiedPush){
 			bannerAdapter.setVisible(true);
 			bannerIcon.setImageResource(R.drawable.ic_fluent_warning_24_filled);
 			bannerTitle.setVisibility(View.VISIBLE);
 			bannerTitle.setText(R.string.mo_settings_unifiedpush_warning);
-			if(UnifiedPush.getDistributors(getContext(), new ArrayList<>()).isEmpty()) {
+			if(!hasAnyUnifiedPushDistrib) {
 				bannerText.setText(R.string.mo_settings_unifiedpush_warning_no_distributors);
 				bannerButton.setText(R.string.info);
 				bannerButton.setOnClickListener(v->UiUtils.launchWebBrowser(getContext(), "https://unifiedpush.org/"));
@@ -342,23 +345,15 @@ public class SettingsNotificationsFragment extends BaseSettingsFragment<Void>{
 	}
 
 	private void onUnifiedPushClick(){
-		if(UnifiedPush.getDistributor(getContext()).isEmpty()){
-			List<String> distributors = UnifiedPush.getDistributors(getContext(), new ArrayList<>());
+		if(!useUnifiedPush){
+			List<String> distributors = UnifiedPush.getDistributors(getContext());
 			showUnifiedPushRegisterDialog(distributors);
 			return;
 		}
-
-		for (AccountSession accountSession : AccountSessionManager.getInstance().getLoggedInAccounts()) {
-			UnifiedPush.unregisterApp(
-					getContext(),
-					accountSession.getID()
-			);
-
-			//re-register to fcm
-			accountSession.getPushSubscriptionManager().registerAccountForPush(getPushSubscription());
-		}
+		UnifiedPushHelper.unregisterAllAccounts(getContext());
 		unifiedPushItem.toggle();
 		rebindItem(unifiedPushItem);
+		useUnifiedPush = false;
 	}
 
 	private void showUnifiedPushRegisterDialog(List<String> distributors){
@@ -366,16 +361,10 @@ public class SettingsNotificationsFragment extends BaseSettingsFragment<Void>{
 				(dialog, which)->{
 					String userDistrib = distributors.get(which);
 					UnifiedPush.saveDistributor(getContext(), userDistrib);
-					for (AccountSession accountSession : AccountSessionManager.getInstance().getLoggedInAccounts()){
-						UnifiedPush.registerApp(
-								getContext(),
-								accountSession.getID(),
-								new ArrayList<>(),
-								getContext().getPackageName()
-						);
-					}
+					UnifiedPushHelper.registerAllAccounts(getContext());
 					unifiedPushItem.toggle();
 					rebindItem(unifiedPushItem);
+					useUnifiedPush = true;
 				}).setOnCancelListener(d->rebindItem(unifiedPushItem)).show();
 	}
 

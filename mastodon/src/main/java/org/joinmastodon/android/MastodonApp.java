@@ -6,6 +6,7 @@ import android.content.Context;
 import android.webkit.WebView;
 
 import org.joinmastodon.android.api.PushSubscriptionManager;
+import org.joinmastodon.android.utils.UnifiedPushHelper;
 
 import me.grishka.appkit.imageloader.ImageCache;
 import me.grishka.appkit.utils.NetworkUtils;
@@ -27,7 +28,11 @@ public class MastodonApp extends Application{
 		ImageCache.setParams(params);
 		NetworkUtils.setUserAgent("MoshidonAndroid/"+BuildConfig.VERSION_NAME);
 
-		PushSubscriptionManager.tryRegisterFCM();
+		if (UnifiedPushHelper.isUnifiedPushEnabled(this)){
+			UnifiedPushHelper.registerAllAccounts(this);
+		} else {
+			PushSubscriptionManager.tryRegisterFCM();
+		}
 		GlobalUserPreferences.load();
 		if(BuildConfig.DEBUG){
 			WebView.setWebContentsDebuggingEnabled(true);

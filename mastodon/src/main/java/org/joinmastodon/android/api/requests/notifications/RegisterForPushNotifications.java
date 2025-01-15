@@ -4,10 +4,11 @@ import org.joinmastodon.android.api.MastodonAPIRequest;
 import org.joinmastodon.android.model.PushSubscription;
 
 public class RegisterForPushNotifications extends MastodonAPIRequest<PushSubscription>{
-	public RegisterForPushNotifications(String endpoint, String encryptionKey, String authKey, PushSubscription.Alerts alerts, PushSubscription.Policy policy){
+	public RegisterForPushNotifications(String endpoint, Boolean standard, String encryptionKey, String authKey, PushSubscription.Alerts alerts, PushSubscription.Policy policy){
 		super(HttpMethod.POST, "/push/subscription", PushSubscription.class);
 		Request r=new Request();
 		r.subscription.endpoint=endpoint;
+		r.subscription.standard = standard;
 		r.data.alerts=alerts;
 		r.policy=policy;
 		r.subscription.keys.p256dh=encryptionKey;
@@ -27,6 +28,8 @@ public class RegisterForPushNotifications extends MastodonAPIRequest<PushSubscri
 
 		private static class Subscription{
 			public String endpoint;
+			// Use standard push notifications if available
+			public Boolean standard;
 			public Keys keys=new Keys();
 		}
 
