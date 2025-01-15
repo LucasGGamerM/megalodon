@@ -39,10 +39,10 @@ public class UnifiedPushNotificationReceiver extends MessagingReceiver{
 		if (account != null) {
 			PublicKeySet ks = endpoint.getPubKeySet();
 			if (ks != null){
-				account.getPushSubscriptionManager().registerAccountForPush(null, true, endpoint.getUrl(), ks.getPubKey(), ks.getAuth());
+				account.getPushSubscriptionManager().registerAccountForPush(account.pushSubscription, true, endpoint.getUrl(), ks.getPubKey(), ks.getAuth());
 			} else {
 				// ks should never be null on new endpoint
-				account.getPushSubscriptionManager().registerAccountForPush(null, endpoint.getUrl());
+				account.getPushSubscriptionManager().registerAccountForPush(account.pushSubscription, endpoint.getUrl());
 			}
 		}
 	}

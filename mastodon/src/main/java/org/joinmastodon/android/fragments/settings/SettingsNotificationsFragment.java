@@ -127,7 +127,7 @@ public class SettingsNotificationsFragment extends BaseSettingsFragment<Void>{
 		GlobalUserPreferences.save();
 		lp.keepOnlyLatestNotification=onlyLatestItem.checked;
 		lp.save();
-		if(needUpdateNotificationSettings && PushSubscriptionManager.arePushNotificationsAvailable()){
+		if(needUpdateNotificationSettings && (PushSubscriptionManager.arePushNotificationsAvailable() || useUnifiedPush)){
 			ps.alerts.mention=mentionsItem.checked;
 			ps.alerts.reblog=boostsItem.checked;
 			ps.alerts.favourite=favoritesItem.checked;
