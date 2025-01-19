@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+	android:color="@color/m3_pressed_overlay">
+	<item android:gravity="center_vertical" android:height="36dp">
+		<shape>
+			<solid android:color="?colorM3Primary"/>
+			<corners android:radius="18dp"/>
+		</shape>
+	</item>
+</ripple>
